@@ -46,3 +46,7 @@ export function getDistance(lat1, lon1, lat2, lon2, unit = 'K') {
   }
   return dist;
 }
+export function replace(str, find, replace) {
+  var escapedFind = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
+  return str.replace(new RegExp(escapedFind, 'g'), replace);
+}
