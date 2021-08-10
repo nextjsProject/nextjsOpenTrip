@@ -12,7 +12,11 @@ export default (req, res) => {
         }
         return place
     })
+
     // filter slug is query slug it will give us the single object as an array
+
+    // if slug is query slug it will give us the single object as an array
+
     const intPlace = IntPlacesWithSlug.filter(place => place.slug === req.query.slug)
 
     res.status(200).json(intPlace)
