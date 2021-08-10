@@ -1,7 +1,5 @@
 import Layout from "@/components/Layout"
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-const API_KEY = process.env.API_KEY;
+    ;
 
 export default function cityPage({ city }) {
     console.log(city)
@@ -26,7 +24,8 @@ It has to fetch that data first to create the route
 export async function getStaticPaths() {
     // if you use NEXT_PUBLIC the values get exposed to the browser
     // the default values will be only available in the node.js env / the server
-
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+    const API_KEY = process.env.API_KEY
 
     // get the whole dataset, we fetch from an api and generate the pathes, the data we get we
     // generate a static path
@@ -54,6 +53,8 @@ export async function getStaticPaths() {
 
 // now we have access to the object with the params key inside the paths array
 export async function getStaticProps({ params: { slug } }) {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+    const API_KEY = process.env.API_KEY
     /*
      request to the respond route, get the data we need to than pass it
      to the client

@@ -4,7 +4,6 @@
 export default function CityItem({ city }) {
   return (
     <div>
-      <div>'no img yet'</div>
       <div>
         <h3>{city.name}</h3>
         <div>{city.country}</div>

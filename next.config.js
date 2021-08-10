@@ -5,6 +5,9 @@ module.exports = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560],
     domains: ['react.webworker.berlin'],
   },
+  env: {
+    mapbox_key: 'pk.eyJ1IjoibWFub2dyYWhsIiwiYSI6ImNrczY0bm9pZDB6bjAycHBoaDJpeXB1NzkifQ.f1xceJ0LaDAZxqvi1jD_hQ'
+  },
   // https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   reactStrictMode: true,
 };
