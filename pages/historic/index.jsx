@@ -77,8 +77,17 @@ export async function getStaticProps() {
   this endpoint, I just shuffle the 250 results and I will slice 25 from them and than
   I will get a better spread
   */
+// filter out this .... Stolperstein
+const searchTerm = 'Stolperstein';
+const filteredTestData = testData.filter(
+  ({ name }) => !name.startsWith(searchTerm)
+);
+
+console.log(filteredTestData);
+const shuffledIntPlaces = shuffle(filteredTestData);
+
 // const shuffledIntPlaces = shuffle(intPlaces);
-const shuffledIntPlaces = shuffle(testData);
+
 
 
 
