@@ -1,16 +1,19 @@
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-import { useState } from 'react';
+
 import { getCenter } from 'geolib';
+import { useState } from 'react';
+
 
 // adding a wrapper to help with mapbox data
 
-function Map({ intPlaces }) {
+function Map(props) {
   // console.log(intPlaces);
-  //keep track of the selected pin and the object that is related to it to match the popup
-  const [selectedPlace, setSelectedPlace] = useState(null);
+//keep track of the selected pin and the object that is related to it to match the popup
+
+
 
   //return an Arr with the needed formating of the lan and lon that where inside the point key
-  const coordinatesArr = intPlaces.map(({ point: { lat, lon } }) => ({
+  const coordinatesArr = props.intPlaces.map(({ point: { lat, lon } }) => ({
     latitude: lat,
     longitude: lon,
   }));
@@ -47,7 +50,7 @@ function Map({ intPlaces }) {
       onViewportChange={(nextViewport) => setviewport(nextViewport)}
     >
       {/* Adding the marker form react wrapper   */}
-      {intPlaces.map((place) => (
+      {props.intPlaces.map((place) => (
         <div key={place.xid}>
           <Marker
             longitude={place.point.lon}
@@ -58,7 +61,7 @@ function Map({ intPlaces }) {
             {/* we set the state to match the thing we clicked*/}
             <p
               role="img"
-              onClick={() => setSelectedPlace(place)}
+              onClick={() => props.changeSelected(place)}
               style={markerStyle}
               aria-label="clickable-pin"
             >
@@ -67,9 +70,9 @@ function Map({ intPlaces }) {
           </Marker>
           {/* now we check if selectedPlace is true (pin is clicked), and when the longitude of the selected and the place that got mapped
             show the popup, if we close it reset the state         */}
-          {selectedPlace && selectedPlace.point.lon === place.point.lon && (
+          {props.selectedPlace && props.selectedPlace.point.lon === place.point.lon && (
             <Popup
-              onClose={() => setSelectedPlace(null)}
+              onClose={() => props.changeSelected(null)}
               closeOnClick={true}
               latitude={place.point.lat}
               longitude={place.point.lon}
