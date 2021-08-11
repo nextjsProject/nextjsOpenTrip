@@ -3,17 +3,14 @@ import { useState } from 'react';
 
 // adding a wrapper to help with mapbox data
 
-function Map({ lon, lat }) {
-  //   console.log(lon + ' ' + lat);
-  const coordinates = {
-    longitude: lon,
-    latitude: lat,
-  };
+function Map({ }) {
+//   console.log(lon + ' ' + lat);
+
   const [viewport, setviewport] = useState({
     width: '100%',
     height: '100%',
-    latitude: coordinates.latitude,
-    longitude: coordinates.longitude,
+    latitude: 40,
+    longitude: 13,
     zoom: 10,
   });
   // I need to change the given props to match the keys latitude and longitude
