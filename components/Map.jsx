@@ -30,8 +30,11 @@ function Map({ intPlaces }) {
   });
   const markerStyle = {
     fontSize: '1.4rem',
-  };
+  }
 
+  const popupStyle ={
+    color: 'red',
+  }
   // I need to change the given props to match the keys latitude and longitude
 
   return (
@@ -49,8 +52,8 @@ function Map({ intPlaces }) {
           <Marker
             longitude={place.point.lon}
             latitude={place.point.lat}
-            offsetLeft={-20}
-            offsetTop={-10}
+            offsetLeft={-10}
+            offsetTop={-40}
           >
             {/* we set the state to match the thing we clicked*/}
             <p
@@ -71,7 +74,7 @@ function Map({ intPlaces }) {
               latitude={place.point.lat}
               longitude={place.point.lon}
             >
-              {place.name}
+              <span style={popupStyle}> {place.name}</span>
             </Popup>
           )}
         </div>
