@@ -1,6 +1,7 @@
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { useState } from 'react';
 import { getCenter } from 'geolib';
+
 
 
 // adding a wrapper to help with mapbox data
@@ -25,7 +26,7 @@ const centerCoordinate = getCenter(coordinatesArr);
     height: '100%',
     latitude: centerCoordinate.latitude,
     longitude: centerCoordinate.longitude,
-    zoom: 10,
+    zoom: 15,
   });
 
   // I need to change the given props to match the keys latitude and longitude
@@ -39,7 +40,23 @@ const centerCoordinate = getCenter(coordinatesArr);
       //    if the user wants to scroll and zoom it will update the viewport values,
       onViewportChange={(nextViewport) => setviewport(nextViewport)}
     >
-      <div>hi</div>
+{
+  /* Adding the marker form react wrapper   */
+}
+{
+  intPlaces.map((place) => (
+    <Marker
+      key={place.xid}
+      longitude={place.point.lon}
+      latitude={place.point.lat}
+      offsetLeft={-20}
+      offsetTop={-10}
+    >
+      <p>📍</p>
+    </Marker>
+  ))
+}
+
     </ReactMapGL>
   );
 }
