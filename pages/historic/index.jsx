@@ -46,22 +46,22 @@ const API_KEY = process.env.API_KEY;
    */
   const lon = '13.41053';
   const lat = '52.52437';
-  // we search in a radius from 10km
-const searchRadius = '10000000';
+  // we search in a radius is Large but the api will only display the 500 nearest To the radius Places
+const searchRadius = '15000';
 
   /*
    * Optional Paramters
    */
-  // max requested data that comes back
-const limitMax = 250;
-
+  // max 500 data that comes back or we have to tell the api
+  const kind = 'historic'
   // minimum rating it should have 1 min and 3 max popular, 7 is cultural heritage
   const rating = 3;
   const res = await fetch(
-    `${API_URL}/places/radius?radius=${searchRadius}&lon=${lon}&lat=${lat}&src_geom=wikidata&src_attr=wikidata&rate=${rating}&format=json&limit=${limitMax}&apikey=${API_KEY}`
+    `${API_URL}/places/radius?radius=${searchRadius}&lon=${lon}&lat=${lat}&src_geom=wikidata&src_attr=wikidata&kinds=${kind}&rate=${rating}&format=json&apikey=${API_KEY}`
   );
   const intPlaces = await res.json();
 // console.log(intPlaces.slice(0, 2));
+
 /*
   it seems like he only gives back the results that are nearest to the radius center
   I wanted to get a random 25 places from Berlin and not the closest to the radius,
@@ -70,6 +70,7 @@ const limitMax = 250;
   I will get a better spread
   */
 const shuffledIntPlaces = shuffle(intPlaces);
+
 
   return {
     //  pass it from the server to the client side component

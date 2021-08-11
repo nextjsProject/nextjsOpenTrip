@@ -26,7 +26,7 @@ const centerCoordinate = getCenter(coordinatesArr);
     height: '100%',
     latitude: centerCoordinate.latitude,
     longitude: centerCoordinate.longitude,
-    zoom: 15,
+    zoom: 11,
   });
 
   // I need to change the given props to match the keys latitude and longitude
