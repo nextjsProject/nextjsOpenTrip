@@ -7,22 +7,19 @@ import { getCenter } from 'geolib';
 function Map({ intPlaces }) {
   // console.log(intPlaces);
   //keep track of the selected pin and the object that is related to it to match the popup
-const [selectedPlace, setSelectedPlace] = useState({});
+  const [selectedPlace, setSelectedPlace] = useState(null);
 
-console.log(selectedPlace);
+  //return an Arr with the needed formating of the lan and lon that where inside the point key
+  const coordinatesArr = intPlaces.map(({ point: { lat, lon } }) => ({
+    latitude: lat,
+    longitude: lon,
+  }));
 
-//return an Arr with the needed formating of the lan and lon that where inside the point key
-const coordinatesArr = intPlaces.map(({ point: { lat, lon } }) => ({
-  latitude: lat,
-  longitude: lon,
-}));
+  // well guess we don't need the center here because we making a search in a Radius
+  // but I will maybe Later use this... we do need it cause of the shuffle
 
-// well guess we don't need the center here because we making a search in a Radius
-// but I will maybe Later use this... we do need it cause of the shuffle
-
-const centerCoordinate = getCenter(coordinatesArr);
-// console.log(centerCoordinate);
-
+  const centerCoordinate = getCenter(coordinatesArr);
+  // console.log(centerCoordinate);
 
   const [viewport, setviewport] = useState({
     width: '100%',
@@ -31,10 +28,9 @@ const centerCoordinate = getCenter(coordinatesArr);
     longitude: centerCoordinate.longitude,
     zoom: 11,
   });
-const markerStyle = {
-  fontSize: '1.4rem',
-};
-
+  const markerStyle = {
+    fontSize: '1.4rem',
+  };
 
   // I need to change the given props to match the keys latitude and longitude
 
@@ -49,9 +45,8 @@ const markerStyle = {
     >
       {/* Adding the marker form react wrapper   */}
       {intPlaces.map((place) => (
-        <div>
+        <div key={place.xid}>
           <Marker
-            key={place.xid}
             longitude={place.point.lon}
             latitude={place.point.lat}
             offsetLeft={-20}
@@ -66,10 +61,19 @@ const markerStyle = {
             >
               📍
             </p>
-            
           </Marker>
-
-
+          {/* now we check if selectedPlace is true (pin is clicked), and when the longitude of the selected and the place that got mapped
+            show the popup, if we close it reset the state         */}
+          {selectedPlace && selectedPlace.point.lon === place.point.lon && (
+            <Popup
+              onClose={() => setSelectedPlace(null)}
+              closeOnClick={true}
+              latitude={place.point.lat}
+              longitude={place.point.lon}
+            >
+              {place.name}
+            </Popup>
+          )}
         </div>
       ))}
     </ReactMapGL>

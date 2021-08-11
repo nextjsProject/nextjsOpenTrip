@@ -8,8 +8,8 @@ import testData from '@/library/testData';
 
 
 export default function displayintPlaces({ intPlaces }) {
-  // hard coding styles just to see the Map
-console.log(intPlaces);
+// hard coding styles just to see the Map
+
 
   const style = {
     minWidth: '600px',
