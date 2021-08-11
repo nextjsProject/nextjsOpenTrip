@@ -3,10 +3,14 @@ import Layout from '@/components/Layout';
 
 import Map from '@/components/Map';
 import { shuffle } from '@/library/helpers';
+import testData from '@/library/testData';
+
 
 
 export default function displayintPlaces({ intPlaces }) {
   // hard coding styles just to see the Map
+console.log(intPlaces);
+
   const style = {
     minWidth: '600px',
     height: '400px',
@@ -38,28 +42,32 @@ export default function displayintPlaces({ intPlaces }) {
 //  if you set revalidate: 1 it will, if it dosn't find anything, fetch again (1sec time it will take)
 // */
 export async function getStaticProps() {
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const API_KEY = process.env.API_KEY;
+// const API_URL = process.env.NEXT_PUBLIC_API_URL;
+// const API_KEY = process.env.API_KEY;
 
-  /*
-   * required Paramters
-   */
-  const lon = '13.41053';
-  const lat = '52.52437';
-  // we search in a radius is Large but the api will only display the 500 nearest To the radius Places
-const searchRadius = '15000';
+//   /*
+//    * required Paramters
+//    */
+//   const lon = '13.41053';
+//   const lat = '52.52437';
+//   // we search in a radius is Large but the api will only display the 500 nearest To the radius Places
+// const searchRadius = '15000';
 
-  /*
-   * Optional Paramters
-   */
-  // max 500 data that comes back or we have to tell the api
-  const kind = 'historic'
-  // minimum rating it should have 1 min and 3 max popular, 7 is cultural heritage
-  const rating = 3;
-  const res = await fetch(
-    `${API_URL}/places/radius?radius=${searchRadius}&lon=${lon}&lat=${lat}&src_geom=wikidata&src_attr=wikidata&kinds=${kind}&rate=${rating}&format=json&apikey=${API_KEY}`
-  );
-  const intPlaces = await res.json();
+//   /*
+//    * Optional Paramters
+//    */
+//   // max 500 data that comes back or we have to tell the api
+//   const limit = 25
+//   const kind = 'historic'
+//   // minimum rating it should have 1 min and 3 max popular, 7 is cultural heritage
+//   const rating = 3;
+//   const res = await fetch(
+//     `${API_URL}/places/radius?radius=${searchRadius}&lon=${lon}&lat=${lat}&limit=${limit}&src_geom=wikidata&src_attr=wikidata&kinds=${kind}&rate=${rating}&format=json&apikey=${API_KEY}`
+//   );
+//   const intPlaces = await res.json();
+
+
+
 // console.log(intPlaces.slice(0, 2));
 
 /*
@@ -69,7 +77,9 @@ const searchRadius = '15000';
   this endpoint, I just shuffle the 250 results and I will slice 25 from them and than
   I will get a better spread
   */
-const shuffledIntPlaces = shuffle(intPlaces);
+// const shuffledIntPlaces = shuffle(intPlaces);
+const shuffledIntPlaces = shuffle(testData);
+
 
 
   return {
