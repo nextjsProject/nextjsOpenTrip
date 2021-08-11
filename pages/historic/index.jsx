@@ -14,18 +14,19 @@ export default function displayintPlaces({ intPlaces }) {
   // now the props get placed inside the component and we can render them on the page awesome
   return (
     <Layout title="25 Berlin Intersting Places">
-
-<section style={style}>
-  <Map />
-</section>;
+      <section style={style}>
+        <Map intPlaces={intPlaces}/>
+      </section>
+      
       <div>
-          
-      {intPlaces.length > 0 &&
-        intPlaces.map((intPlace) => (
-          <IntItem key={intPlace.xid} intPlace={intPlace} />
-        ))}
-      </div>
+{
+  intPlaces.length > 0 &&
+    intPlaces.map((intPlace) => (
+      <IntItem key={intPlace.xid} intPlace={intPlace} />
+    ))
+}
 
+      </div>
     </Layout>
   );
 }
