@@ -7,7 +7,7 @@ import Map from '@/components/Map';
 import { shuffle } from '@/library/helpers';
 import testData from '@/library/testData';
 
-export default function displayintPlaces({ intPlaces }) {
+export default function displayintPlaces({ intPlaces, intNames }) {
 // hard coding styles just to see the Map
 
 
@@ -42,13 +42,14 @@ if (selectedPlace) {
       </section>
 
       <div>
-        {isList &&
+        {/* {isList &&
           intPlaces.length > 0 &&
           intPlaces.map((intPlace) => (
             <IntItem key={intPlace.xid} intPlace={intPlace} />
-          ))}
+          ))} */}
 {
-  !isList && <IntItem intPlace={selectedPlace} />
+!isList && <IntItem intPlace={selectedPlace} intNames={intNames} />
+
 }
 
       </div>
@@ -112,11 +113,17 @@ const placeDetails = await Promise.all(detailsPromises)
 
 const placesAndDetails = slicedResult.map(item1=> ({...item1, ...placeDetails.find(item2=> item2.xid === item1.xid)}))
 
-// console.log(placesAndDetails)
+console.log(placesAndDetails)
+
+const namesAndIDs = intPlaces.map((item) => ({
+  name: item.name,
+  xid: item.xid,
+}));
+console.log(namesAndIDs);
 
   return {
     //  pass it from the server to the client side component
-    props: { intPlaces: placesAndDetails },
+    props: { intPlaces: placesAndDetails, intNames: namesAndIDs},
     revalidate: 360,
   };
 }

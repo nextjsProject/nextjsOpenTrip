@@ -29,7 +29,7 @@ function Map(props) {
     height: '100%',
     latitude: centerCoordinate.latitude,
     longitude: centerCoordinate.longitude,
-    zoom: 11,
+    zoom: 12,
   });
   const markerStyle = {
     fontSize: '1.4rem',
@@ -51,12 +51,12 @@ function Map(props) {
     >
       {/* Adding the marker form react wrapper   */}
       {props.intPlaces.map((place) => (
-        <div className='locationPins' key={place.xid}>
+        <div key={place.xid}>
           <Marker
             longitude={place.point.lon}
             latitude={place.point.lat}
-            offsetLeft={-10}
-            offsetTop={-40}
+            offsetLeft={-11}
+            offsetTop={-44}
           >
             {/* we set the state to match the thing we clicked*/}
             <p
