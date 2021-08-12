@@ -6,13 +6,10 @@ export default function Navigation() {
       <Link href="/">
         <a>Start</a>
       </Link>
-      <Link href="/standorte">
-        <a>Standorte</a>
-      </Link>
-<Link href="/places">
-  <a>Places</a>
-</Link>
 
+      <Link href="/historic">
+        <a>Historic</a>
+      </Link>
     </nav>
   );
 }
