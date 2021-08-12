@@ -32,6 +32,7 @@ if (selectedPlace) {
   // now the props get placed inside the component and we can render them on the page awesome
   return (
     <Layout title="25 Berlin Historic Places">
+    <p>Click a Pin and Guess the Place</p>
       <section style={style}>
 <Map
   intPlaces={intPlaces}
@@ -79,7 +80,7 @@ const searchRadius = '12000';
  * Optional Paramters
  */
 // max 500 data that comes back or we have to tell the api
-const limit = 250;
+const limit = 50;
 const kind = 'historic';
 // minimum rating it should have 1 min and 3 max popular, 7 is cultural heritage
 const rating = 3;
@@ -97,10 +98,10 @@ const filteredData = intPlaces.filter(
 // shuffle the data (cause he gives back nearest places first)
 const shuffledIntPlaces = shuffle(filteredData);
 // slice the Result to 25 
-const slicedResult = shuffledIntPlaces.slice(0, 2);
+
 
 // I need the Ids to do a seperate search for the Img, transform the object inside the array
-const placesIds = slicedResult.map((result) => ({ xid: result.xid }));
+const placesIds = shuffledIntPlaces.map((result) => ({ xid: result.xid }));
 // console.log(placesIds);
 
 const detailsPromises = placesIds.map(({xid})=> fetch(`${API_URL}/places/xid/${xid}?apikey=${API_KEY} `).then(res=>res.json()))
@@ -111,11 +112,16 @@ const placeDetails = await Promise.all(detailsPromises)
 // so the second Data overwrites the id in the first set, awesome
 // const a3 = a1.map(t1 => ({...t1, ...a2.find(t2 => t2.id === t1.id)}))
 
-const placesAndDetails = slicedResult.map(item1=> ({...item1, ...placeDetails.find(item2=> item2.xid === item1.xid)}))
+const placesAndDetails = shuffledIntPlaces.map(item1=> ({...item1, ...placeDetails.find(item2=> item2.xid === item1.xid)}))
 
-console.log(placesAndDetails)
+// some have no img filter them out, thats why I fetched 50, cause I don't know if the second fetch object has even images
+// found out there are places with no img with ? we dont get arrow message source not defined
+const resultWithImg = placesAndDetails.filter(item=> item.preview?.source?item:'' ).slice(0,25)
 
-const namesAndIDs = intPlaces.map((item) => ({
+
+// console.log(placesAndDetails)
+
+const namesAndIDs = resultWithImg.map((item) => ({
   name: item.name,
   xid: item.xid,
 }));
@@ -123,7 +129,7 @@ console.log(namesAndIDs);
 
   return {
     //  pass it from the server to the client side component
-    props: { intPlaces: placesAndDetails, intNames: namesAndIDs},
+    props: { intPlaces: resultWithImg, intNames: namesAndIDs},
     revalidate: 360,
   };
 }
