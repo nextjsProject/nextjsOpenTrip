@@ -29,7 +29,7 @@ function Map(props) {
     height: '100%',
     latitude: centerCoordinate.latitude,
     longitude: centerCoordinate.longitude,
-    zoom: 11.5,
+    zoom: 10.5,
   });
   const markerStyle = {
     fontSize: '1.4rem',

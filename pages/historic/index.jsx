@@ -5,22 +5,21 @@ import { useState } from 'react';
 
 import Map from '@/components/Map';
 import { shuffle } from '@/library/helpers';
-import testData from '@/library/testData';
+// import testData from '@/library/testData';
 
 export default function displayintPlaces({ intPlaces, intNames }) {
-// hard coding styles just to see the Map
 
 
 // with function I pass the needed props changes from the child to the parent
 const [selectedPlace, setSelectedPlace] = useState(null);
 
 
-let isList = true;
+let notSelected = true;
 //first view List, than changes if you click a pin
 if (selectedPlace) {
-  isList = false;
+  notSelected = false;
 } else {
-  isList = true;
+  notSelected = true;
 }
 
 
@@ -31,7 +30,7 @@ if (selectedPlace) {
 
   // now the props get placed inside the component and we can render them on the page awesome
   return (
-    <Layout title="25 Berlin Historic Places">
+    <Layout title="Quiz: Berlin Historic Places">
     <p>Click a Pin and Guess the Place</p>
       <section style={style}>
 <Map
@@ -43,13 +42,13 @@ if (selectedPlace) {
       </section>
 
       <div>
-        {/* {isList &&
+        {/* {notSelected &&
           intPlaces.length > 0 &&
           intPlaces.map((intPlace) => (
             <IntItem key={intPlace.xid} intPlace={intPlace} />
           ))} */}
 {
-!isList && <IntItem intPlace={selectedPlace} intNames={intNames} />
+!notSelected && <IntItem intPlace={selectedPlace} intNames={intNames} />
 
 }
 
@@ -73,13 +72,13 @@ const API_KEY = process.env.API_KEY;
 const lon = '13.41053';
 const lat = '52.52437';
 // we search in a radius is Large but the api will only display the 500 nearest To the radius Places
-const searchRadius = '12000';
+const searchRadius = '9500';
 
 
 /*
  * Optional Paramters
  */
-// max 500 data that comes back or we have to tell the api
+// max 500 data that comes back or we have to tell the api alimit for now its 50 cause i don't wont to reach the limit
 const limit = 50;
 const kind = 'historic';
 // minimum rating it should have 1 min and 3 max popular, 7 is cultural heritage
@@ -97,7 +96,6 @@ const filteredData = intPlaces.filter(
 );
 // shuffle the data (cause he gives back nearest places first)
 const shuffledIntPlaces = shuffle(filteredData);
-// slice the Result to 25 
 
 
 // I need the Ids to do a seperate search for the Img, transform the object inside the array
