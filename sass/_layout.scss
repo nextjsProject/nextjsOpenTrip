@@ -51,7 +51,9 @@ body {
   background-color: white !important;
   transform: scale(1.2);
 }
-
+li {
+ padding-top: 7px;
+}
 .site-main {
   /*   Teil des Sticky Footers: Sorgt dafür, dass der "mittlere" Bereich, also der Inhalt
     anwächst, falls freier Platz zwischen Inhalt und Footer besteht.
