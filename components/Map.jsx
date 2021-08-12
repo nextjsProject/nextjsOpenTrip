@@ -9,11 +9,15 @@ import { useState } from 'react';
 function Map(props) {
   // console.log(intPlaces);
 //keep track of the selected pin and the object that is related to it to match the popup
+const [displayedPlaces, setDisplayedPlaces] = useState(props.intPlaces)
+
+
+
 
 
 
   //return an Arr with the needed formating of the lan and lon that where inside the point key
-  const coordinatesArr = props.intPlaces.map(({ point: { lat, lon } }) => ({
+  const coordinatesArr = displayedPlaces.map(({ point: { lat, lon } }) => ({
     latitude: lat,
     longitude: lon,
   }));
@@ -49,9 +53,11 @@ function Map(props) {
       //    if the user wants to scroll and zoom it will update the viewport values,
       onViewportChange={(nextViewport) => setviewport(nextViewport)}
     >
-      {/* Adding the marker form react wrapper   */}
-      {props.intPlaces.map((place) => (
+      {/* Adding the marker and popup form react wrapper   */}
+      {displayedPlaces.map((place) => (
+
         <div key={place.xid}>
+          
           <Marker
             longitude={place.point.lon}
             latitude={place.point.lat}
@@ -72,7 +78,9 @@ function Map(props) {
             show the popup, if we close it reset the state         */}
           {props.selectedPlace && props.selectedPlace.point.lon === place.point.lon && (
             <Popup
-              onClose={() => props.changeSelected(null)}
+              // get rid of the selected pin and set selected to null
+              onClose={()=>{ setDisplayedPlaces(displayedPlaces.filter(i=>i.xid !== props.selectedPlace.xid));props.changeSelected(null)}}
+              // onClose={() => props.changeSelected(null)}
               closeOnClick={true}
               latitude={place.point.lat}
               longitude={place.point.lon}
