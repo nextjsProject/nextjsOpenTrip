@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { shuffle } from '@/library/helpers';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 export default function IntItem({ intPlace, intNames }) {
   const [anwser, setAnwser] = useState({});
@@ -24,6 +24,8 @@ export default function IntItem({ intPlace, intNames }) {
     paddingTop: '7px',
   };
   // now get the name of the intPlace and 3 random other ones to get diplayed
+
+ const questionList = useMemo(()=>{
   const otherPlaces = intNames.filter((i) => i.xid !== intPlace.xid);
 
   const shuffledOtherPlaces = shuffle(otherPlaces);
@@ -34,6 +36,9 @@ export default function IntItem({ intPlace, intNames }) {
   console.log(addCorrectOne);
 
   const questionList = shuffle(addCorrectOne);
+
+  return questionList
+  },[intNames,intPlace])
 
   return (
     <div style={wrap}>
@@ -49,7 +54,7 @@ export default function IntItem({ intPlace, intNames }) {
         <h3>{intPlace.name}</h3>
         <ol type="a">
           {questionList.map((question) => (
-            <li onClick={() => setAnwser(question)}>{question.name}</li>
+            <li key={question.xid} onClick={() => setAnwser(question)}>{question.name}</li>
           ))}
         </ol>
         {/* <span>{`lat: ${intPlace.point.lat} `}</span> */}
