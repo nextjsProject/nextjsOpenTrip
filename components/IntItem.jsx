@@ -1,11 +1,10 @@
-import Image from 'next/image';
 import { shuffle } from '@/library/helpers';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
+import LiItem from './LiItem';
 
 export default function IntItem({ intPlace, intNames }) {
-  const [anwser, setAnwser] = useState({});
-
-  console.log(anwser);
+  
+  
   const wrap = {
     display: 'flex',
     padding: '20px 5px',
@@ -51,16 +50,12 @@ export default function IntItem({ intPlace, intNames }) {
         alt={intPlace.name}
       />
       <div style={contentStyle}>
-        <h3>{intPlace.name}</h3>
+        <h3>Which historic place is this???</h3>
         <ol type="a">
           {questionList.map((question) => (
-            <li key={question.xid} onClick={() => setAnwser(question)}>{question.name}</li>
+            <LiItem key={question.xid} question={question} intPlace={intPlace}/>
           ))}
         </ol>
-        {/* <span>{`lat: ${intPlace.point.lat} `}</span> */}
-        {/* <span>{`lon: ${intPlace.point.lon}`}</span> */}
-        {/* TODO: we need to style it better maybe a list we map them over */}
-        {/* <div>{intPlace.kinds}</div> */}
       </div>
     </div>
   );

@@ -54,6 +54,16 @@ body {
 li {
  padding-top: 7px;
 }
+
+.correct{
+  color: rgb(59, 215, 59);
+}
+
+.wrong{
+  text-decoration: line-through;
+  color: rgb(240, 92, 92);
+}
+
 .site-main {
   /*   Teil des Sticky Footers: Sorgt dafür, dass der "mittlere" Bereich, also der Inhalt
     anwächst, falls freier Platz zwischen Inhalt und Footer besteht.
