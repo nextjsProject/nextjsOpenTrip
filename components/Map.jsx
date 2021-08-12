@@ -51,7 +51,7 @@ function Map(props) {
     >
       {/* Adding the marker form react wrapper   */}
       {props.intPlaces.map((place) => (
-        <div key={place.xid}>
+        <div className='locationPins' key={place.xid}>
           <Marker
             longitude={place.point.lon}
             latitude={place.point.lat}
@@ -77,7 +77,8 @@ function Map(props) {
               latitude={place.point.lat}
               longitude={place.point.lon}
             >
-              <span style={popupStyle}> {place.name}</span>
+              <img className="map-image" src={place.preview.source} alt={place.name} height={place.preview.height} width={place.preview.width} />
+              {/* <span style={popupStyle}> {place.name}</span> */}
             </Popup>
           )}
         </div>
