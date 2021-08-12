@@ -112,7 +112,7 @@ const placeDetails = await Promise.all(detailsPromises)
 
 const placesAndDetails = slicedResult.map(item1=> ({...item1, ...placeDetails.find(item2=> item2.xid === item1.xid)}))
 
-// console.log(placesAndDetails)
+console.log(placesAndDetails)
 
   return {
     //  pass it from the server to the client side component
