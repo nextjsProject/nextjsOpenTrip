@@ -1,5 +1,6 @@
 import IntItem from '@/components/IntItem';
 import Layout from '@/components/Layout';
+import { useRouter } from 'next/router'
 
 import { useState } from 'react';
 
@@ -8,14 +9,13 @@ import { shuffle } from '@/library/helpers';
 // import testData from '@/library/testData';
 
 export default function displayintPlaces({ intPlaces, intNames }) {
-
+const router = useRouter()
 
 // with function I pass the needed props changes from the child to the parent
 const [selectedPlace, setSelectedPlace] = useState(null);
 
 
 let notSelected = true;
-//first view List, than changes if you click a pin
 if (selectedPlace) {
   notSelected = false;
 } else {
@@ -28,16 +28,17 @@ if (selectedPlace) {
     height: '400px',
   };
 
-  // now the props get placed inside the component and we can render them on the page awesome
   return (
     <Layout title="Quiz: Berlin Historic Places">
-    <p>Click a Pin and Guess the Place</p>
+    <span>Click a Pin and Guess the Place</span>
+{/* a little cheating to start a new game (time is running out), I will have to fetch hier again with useEffect, or I fetch alot more and take randoms form ther but I don't want to crash the limit      */}
+    <button onClick={()=>router.reload(window.location.pathname)}>Start again</button>
       <section style={style}>
 <Map
   intPlaces={intPlaces}
   selectedPlace={selectedPlace}
   changeSelected={(selectedPlace) => setSelectedPlace(selectedPlace)}
-/>;
+/>
 
       </section>
 
@@ -117,13 +118,12 @@ const placesAndDetails = shuffledIntPlaces.map(item1=> ({...item1, ...placeDetai
 const resultWithImg = placesAndDetails.filter(item=> item.preview?.source?item:'' ).slice(0,25)
 
 
-// console.log(placesAndDetails)
+console.log(placesAndDetails)
 
 const namesAndIDs = resultWithImg.map((item) => ({
   name: item.name,
   xid: item.xid,
 }));
-console.log(namesAndIDs);
 
   return {
     //  pass it from the server to the client side component
