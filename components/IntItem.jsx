@@ -19,9 +19,6 @@ export default function IntItem({ intPlace, intNames }) {
     padding: '0 20px',
   };
 
-  const liStyle = {
-    paddingTop: '7px',
-  };
   // now get the name of the intPlace and 3 random other ones to get diplayed
 
   const questionList = useMemo(() => {
