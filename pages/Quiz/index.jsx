@@ -8,7 +8,7 @@ import Map from '@/components/Map';
 import { shuffle } from '@/library/helpers';
 // import testData from '@/library/testData';
 
-export default function displayintPlaces({ intPlaces, intNames }) {
+export default function DisplayintPlaces({ intPlaces, intNames }) {
 const router = useRouter()
 
 // with function I pass the needed props changes from the child to the parent

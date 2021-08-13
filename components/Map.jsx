@@ -39,9 +39,6 @@ const [displayedPlaces, setDisplayedPlaces] = useState(props.intPlaces)
     fontSize: '1.4rem',
   }
 
-  const popupStyle ={
-    color: 'red',
-  }
 
   return (
     <ReactMapGL
