@@ -42,7 +42,6 @@ const [displayedPlaces, setDisplayedPlaces] = useState(props.intPlaces)
   const popupStyle ={
     color: 'red',
   }
-  // I need to change the given props to match the keys latitude and longitude
 
   return (
     <ReactMapGL

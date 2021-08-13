@@ -1,9 +1,10 @@
 import { shuffle } from '@/library/helpers';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import LiItem from './LiItem';
 
+
 export default function IntItem({ intPlace, intNames }) {
-  
+  const [showmore, setShowmore] = useState(false)
   
   const wrap = {
     display: 'flex',
@@ -56,6 +57,10 @@ export default function IntItem({ intPlace, intNames }) {
             <LiItem key={question.xid} question={question} intPlace={intPlace}/>
           ))}
         </ol>
+        <button onClick={()=>setShowmore(!showmore)}>Readmore about the place</button>
+          {showmore &&
+            <p>{intPlace.wikipedia_extracts.text}</p>
+          }
       </div>
     </div>
   );
