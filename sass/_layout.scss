@@ -58,12 +58,12 @@ li {
 }
 
 .correct{
-  color: rgb(59, 215, 59);
+  color: rgb(59, 215, 59)!important;
 }
 
 .wrong{
   text-decoration: line-through;
-  color: rgb(240, 92, 92);
+  color: rgb(240, 92, 92)!important;
 }
 
 .site-main {
@@ -87,6 +87,12 @@ border: none;
 box-shadow: none;
 margin: 0;
 font-weight: normal;
+}
+.anwsers > button{
+  display: block;
+  padding: 0;
+  background: transparent;
+  color: white;
 }
 
 .inner-width {

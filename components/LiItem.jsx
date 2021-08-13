@@ -17,7 +17,7 @@ export default function LiItem({question,intPlace}) {
 
     return (
         <>
-            <li type='button'  className={isCorrect? 'correct':isCorrect===false ?'wrong': '' } onClick={() => setAnwser(question)}>{question.name}</li>
+            <button className={isCorrect? 'correct':isCorrect===false ?'wrong': '' } onClick={() => setAnwser(question)}>{question.name}</button>
         </>
     )
 }

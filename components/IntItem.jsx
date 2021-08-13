@@ -48,7 +48,7 @@ export default function IntItem({ intPlace, intNames }) {
       />
       <div style={contentStyle}>
         <h3>Which historic place is this???</h3>
-        <ol type="a">
+        <div className='anwsers'>
           {questionList.map((question) => (
             <LiItem
               key={question.xid}
@@ -56,7 +56,7 @@ export default function IntItem({ intPlace, intNames }) {
               intPlace={intPlace}
             />
           ))}
-        </ol>
+        </div>
         <div>
 
         <button onClick={()=> setShowTip(!showTip)}>Tipp</button>
