@@ -58,17 +58,18 @@ const [displayedPlaces, setDisplayedPlaces] = useState(props.intPlaces)
             longitude={place.point.lon}
             latitude={place.point.lat}
             offsetLeft={-11}
-            offsetTop={-44}
+            offsetTop={-22}
           >
             {/* we set the state to match the thing we clicked*/}
-            <p
+            <button className='pinButton'
               role="img"
               onClick={() => props.changeSelected(place)}
               style={markerStyle}
-              aria-label="clickable-pin"
             >
-              📍
-            </p>
+              <span
+                aria-label="clickable-pin"
+               role='img'>📍</span>
+            </button>
           </Marker>
           {/* now we check if selectedPlace is true (pin is clicked), and when the longitude of the selected and the place that got mapped
             show the popup, if we close it reset the state         */}

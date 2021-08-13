@@ -76,6 +76,19 @@ li {
   flex: 1 0 auto;
 }
 
+.pinButton {
+  padding: 0;
+border-radius: 0.5em;
+font-size: 1rem;
+background: transparent;
+color: #0f0e17;
+border: none;
+-webkit-box-shadow: none;
+box-shadow: none;
+margin: 0;
+font-weight: normal;
+}
+
 .inner-width {
   width: 100%;
   max-width: 50rem;
