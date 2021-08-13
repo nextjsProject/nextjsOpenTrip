@@ -118,7 +118,6 @@ const placesAndDetails = shuffledIntPlaces.map(item1=> ({...item1, ...placeDetai
 const resultWithImg = placesAndDetails.filter(item=> item.preview?.source?item:'' ).slice(0,25)
 
 
-console.log(placesAndDetails)
 
 const namesAndIDs = resultWithImg.map((item) => ({
   name: item.name,

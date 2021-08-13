@@ -2,15 +2,14 @@ import { shuffle } from '@/library/helpers';
 import { useMemo, useState } from 'react';
 import LiItem from './LiItem';
 
-
 export default function IntItem({ intPlace, intNames }) {
-  const [showmore, setShowmore] = useState(false)
-  
+  const [showmore, setShowmore] = useState(false);
+  const [showTip, setShowTip] = useState(false);
+  console.log(intPlace)
   const wrap = {
     display: 'flex',
     padding: '20px 5px',
   };
-
   const imgStyle = {
     width: '190px',
     height: '190px',
@@ -25,20 +24,20 @@ export default function IntItem({ intPlace, intNames }) {
   };
   // now get the name of the intPlace and 3 random other ones to get diplayed
 
- const questionList = useMemo(()=>{
-  const otherPlaces = intNames.filter((i) => i.xid !== intPlace.xid);
+  const questionList = useMemo(() => {
+    const otherPlaces = intNames.filter((i) => i.xid !== intPlace.xid);
 
-  const shuffledOtherPlaces = shuffle(otherPlaces);
+    const shuffledOtherPlaces = shuffle(otherPlaces);
 
-  const threeRandomPlaces = shuffledOtherPlaces.slice(0, 3);
+    const threeRandomPlaces = shuffledOtherPlaces.slice(0, 3);
 
-  const addCorrectOne = [...threeRandomPlaces, intPlace];
-  console.log(addCorrectOne);
+    const addCorrectOne = [...threeRandomPlaces, intPlace];
+    console.log(addCorrectOne);
 
-  const questionList = shuffle(addCorrectOne);
+    const questionList = shuffle(addCorrectOne);
 
-  return questionList
-  },[intNames,intPlace])
+    return questionList;
+  }, [intNames, intPlace]);
 
   return (
     <div style={wrap}>
@@ -54,13 +53,22 @@ export default function IntItem({ intPlace, intNames }) {
         <h3>Which historic place is this???</h3>
         <ol type="a">
           {questionList.map((question) => (
-            <LiItem key={question.xid} question={question} intPlace={intPlace}/>
+            <LiItem
+              key={question.xid}
+              question={question}
+              intPlace={intPlace}
+            />
           ))}
         </ol>
-        <button onClick={()=>setShowmore(!showmore)}>Readmore about the place</button>
-          {showmore &&
-            <p>{intPlace.wikipedia_extracts.text}</p>
-          }
+        <div>
+
+        <button onClick={()=> setShowTip(!showTip)}>Tipp</button>
+        {showTip && <span>Straße: {intPlace.address.road}, in {intPlace.address.suburb}</span>}
+        </div>
+        <button onClick={() => setShowmore(!showmore)}>
+          Readmore about the place
+        </button>
+        {showmore && <p>{intPlace.wikipedia_extracts.text}</p>}
       </div>
     </div>
   );
