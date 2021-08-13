@@ -7,8 +7,8 @@ export default function Navigation() {
         <a>Start</a>
       </Link>
 
-      <Link href="/historic">
-        <a>Historic</a>
+      <Link href="/Quiz">
+        <a>Quiz</a>
       </Link>
     </nav>
   );
