@@ -62,7 +62,6 @@ const [displayedPlaces, setDisplayedPlaces] = useState(props.intPlaces)
           >
             {/* we set the state to match the thing we clicked*/}
             <button className='pinButton'
-              role="img"
               onClick={() => props.changeSelected(place)}
               style={markerStyle}
             >
